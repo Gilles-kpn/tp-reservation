@@ -6,6 +6,8 @@ import { ApiReservationService } from './../../services/api/api-reservation.serv
 import { IconsService } from 'src/app/services/icons/icons.service';
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/services/app/app.service';
+import { finalize } from 'rxjs';
+import { ToastService } from 'src/app/services/app/toast.service';
 
 @Component({
   selector: 'app-reservations',
@@ -19,7 +21,7 @@ export class ReservationsComponent implements OnInit {
   reservable: Reservable | undefined;
   week:Date[] = [];
 
-  constructor(public icons: IconsService, private app:AppService, private reservation: ApiReservationService, private reservableService: ApiReservableService, private route: ActivatedRoute) { }
+  constructor(public icons: IconsService,private toast:ToastService, private app:AppService, private reservation: ApiReservationService, private reservableService: ApiReservableService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(p => {
@@ -53,16 +55,21 @@ export class ReservationsComponent implements OnInit {
   }
 
   reserve(value:any){
-    this.reserving = true;
-    if(this.reservable){
-      this.reservation.reserve(this.reservable.id, value).subscribe(reservation => {
-        //@ts-ignore
-        reservation.professor = this.app.getUser()
-        this.reservations.push(reservation);
-
-        this.reserving = false;
-      })
+    if(value.startDate < value.endDate){
+      this.reserving = true;
+      if (this.reservable) {
+        this.reservation.reserve(this.reservable.id, value).pipe(finalize(() => {
+          this.reserving = false;
+        })).subscribe(reservation => {
+          //@ts-ignore
+          reservation.professor = this.app.getUser()
+          this.reservations.push(reservation);
+        })
+      }
+    }else{
+      this.toast.showError("La date de début doit être antérieure à la date de fin", "Erreur");
     }
+    
   }
 
   getReservationsAbout(reservableId: string) {

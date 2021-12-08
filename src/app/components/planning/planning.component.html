@@ -2,7 +2,7 @@
     <div class="m-0 filter">
         <div class="h3">Planing:{{getWeekStartAndEndDates(defaultdDate).startDate| date}} - {{getWeekStartAndEndDates(defaultdDate).endDate| date}}  <fa-icon [icon]="icons.spinner" *ngIf="loading" [pulse]="true"></fa-icon></div>
         <div class="options d-flex">
-            <fa-icon [icon]="icons.export" (click)="exportAsPDF(planning)"></fa-icon>
+            <fa-icon [icon]="icons.export" (click)="exportAsPDF(planning)" style="cursor: pointer;"></fa-icon>
             <input class="datepicker" type="date" data-date-format="mm/dd/yyyy" id="calendar" #d (change)="setDate(d.valueAsDate)">
         </div>
        

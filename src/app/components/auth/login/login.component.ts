@@ -5,6 +5,7 @@ import { AppService } from './../../../services/app/app.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ApiAuthService } from 'src/app/services/api/api-auth.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -13,25 +14,26 @@ import { ApiAuthService } from 'src/app/services/api/api-auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  loading:boolean = false;
-  constructor(private auth:ApiAuthService,private app:AppService,private navigator:AppNavigatorService, public icons:IconsService) { }
+  loading: boolean = false;
+  constructor(private auth: ApiAuthService, private app: AppService, private navigator: AppNavigatorService, public icons: IconsService) { }
 
   ngOnInit(): void {
     console.log(this.app.getUser());
   }
 
-  onSubmit(form:NgForm){
+  onSubmit(form: NgForm) {
     this.loading = true
-    this.auth.login(form.value).subscribe(
-      data=>{
-        this.auth.current("Bearer "+data.token).subscribe(
-          user=>{
-            this.loading = false
-            user.token = "Bearer "+data.token
+    this.auth.login(form.value).pipe(finalize(()=>{
+      this.loading = false
+    })).subscribe(
+      data => {
+        this.auth.current("Bearer " + data.token).subscribe({
+          next: user => {
+            user.token = "Bearer " + data.token
             this.app.setUser(user)
             this.navigator.navigateTo("")
           }
-        )
+        })
       }
     )
   }

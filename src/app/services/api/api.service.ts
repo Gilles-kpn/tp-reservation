@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, of, map, Observable } from 'rxjs';
 import { AppService } from '../app/app.service';
+import { ToastService } from '../app/toast.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   private API_BASE_URL: string ="https://tp-reservations.azurewebsites.net/api/"
-  constructor(private query:HttpClient,private app:AppService) { }
+  constructor(private query:HttpClient,private app:AppService,private toast:ToastService) { }
 
 
   public  executeRequest(
@@ -32,7 +33,23 @@ export class ApiService {
   }
 
   private handleError(error:any):string{
-      console.log(error.message);
+      switch(error.status){
+        case 500:
+          this.toast.showError("Erreur interne du serveur","Erreur")
+          break;
+        case 401:
+          this.toast.showError("Vous n'êtes pas autorisé à effectuer cette action","Erreur")
+          break;
+        case 400:
+          this.toast.showError("Veuillez vérifier les champs","Erreur")
+          break;
+        case 404:
+          this.toast.showError("Cette ressource n'existe pas","Erreur")
+          break;
+        default:
+          this.toast.showError("Une erreur est survenue","Erreur")
+          break;
+      }
       return ''
   }
 

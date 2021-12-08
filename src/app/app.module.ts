@@ -12,6 +12,8 @@ import { ReservableComponent } from './components/reservable/reservable.componen
 import { PlanningComponent } from './components/planning/planning.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ReservationsComponent } from './components/reservations/reservations.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { ReservationsComponent } from './components/reservations/reservations.co
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
     
   ],
   providers: [
