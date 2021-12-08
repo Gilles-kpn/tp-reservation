@@ -1,0 +1,82 @@
+<div class="reservations col-md-8 col-md-offset-3 mx-auto">
+    <div class="all" *ngIf="reservations">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Reserver {{reservable?.name | titlecase}}</h5>
+                        <button type="button" class="close btn" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form #form="ngForm" class="modal-body" ngNativeValidate (ngSubmit)="reserve(form.value)" >
+                        <div class="form-group">
+                            <label for="name">Date de Debut</label>
+                            <input type="datetime-local" class="form-control" name="startDate" id="startDate" required ngModel />
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Date de Fin</label>
+                            <input type="datetime-local" class="form-control" name="endDate" id="endDate" required ngModel />
+                        </div>
+                        <div class="form-group mt-4">
+                            
+                            <button type="submit" class="btn col-md-12 btn-primary"><fa-icon [icon]="icons.spinner" [pulse]="true" *ngIf="reserving"></fa-icon> Reserver</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <section class="timeline_area section_padding_130" >
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 d-flex align-items-center justify-content-between" *ngIf="reservable">
+                        <!-- Section Heading-->
+                        <div class="section_heading text-left">
+                            <h6>Reservations: {{reservable?.name | titlecase}}</h6>
+                            <h3>{{week[0] | date}} - {{week[6] | date}}</h3>
+                            <div class="line"></div>
+                        </div>
+                        <button class="btn " type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Reserver
+                        </button>
+                    </div>
+                </div>
+                <div class="row" *ngIf="reservations.length>0">
+                    <div class="col-12">
+                        <!-- Timeline Area-->
+                        <div class="apland-timeline-area">
+                            <!-- Single Timeline Content-->
+                            <div class="single-timeline-area" *ngFor="let date of week">
+                                <div class="timeline-date wow fadeInLeft" data-wow-delay="0.1s"
+                                    style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInLeft;">
+                                    <p>{{date | date : 'EEEE, MMMM d, y'}}</p>
+                                </div>
+                                <div class="row" >
+                                    <div class="col-12 col-md-6 col-lg-4" *ngFor="let reservation of findreservationsOfDate(date)">
+                                        <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s"
+                                            style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
+                                            <div class="d-flex align-items-center " style="flex-direction: column; justify-content: space-around; margin-right: 7px;" >
+                                                <i class="fa fa-calendar" aria-hidden="true" style="cursor: pointer;"></i>
+                                                <i class="fa fa-trash" style="color: red;" *ngIf="isCreator(reservation)" style="cursor: pointer;" (click)="delete(reservation)"></i>
+                                            </div>
+                                            <div class="timeline-text">
+                                                <h6>{{reservation.professor.firstName+' '+ reservation.professor.lastName}}</h6>
+                                                <p>{{reservation.startDate | date: 'shortTime'}} - {{reservation.endDate | date: 'shortTime'}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="loading" *ngIf="loading">
+        <fa-icon [icon]="icons.spinner" [pulse]="true" size="10x"></fa-icon>
+    </div>
+</div>

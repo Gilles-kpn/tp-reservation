@@ -1,0 +1,37 @@
+<div class="planning col-md-10 col-md-offset-2 mx-auto">
+    <div class="m-0 filter">
+        <div class="h3">Planing:{{getWeekStartAndEndDates(defaultdDate).startDate| date}} - {{getWeekStartAndEndDates(defaultdDate).endDate| date}}  <fa-icon [icon]="icons.spinner" *ngIf="loading" [pulse]="true"></fa-icon></div>
+        <div class="options d-flex">
+            <fa-icon [icon]="icons.export" (click)="exportAsPDF(planning)"></fa-icon>
+            <input class="datepicker" type="date" data-date-format="mm/dd/yyyy" id="calendar" #d (change)="setDate(d.valueAsDate)">
+        </div>
+       
+    </div>
+    <div class="container-fluid" #planning>
+        <div class="timetable-img text-center">
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr class="bg-light-gray">
+                        <th class="text-uppercase">Time</th>
+                        <th class="text-uppercase" *ngFor="let date of getWeekDateBetween(getWeekStartAndEndDates(defaultdDate))">{{date | date: 'EEEE, d/M/yy'}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let hour of getEachHourBetweenHours(07,19)">
+                        <td class="text-center" >{{hour+':00 -'}} {{hour+1}}:00</td>
+                        <td  *ngFor="let date of getWeekDateBetween(getWeekStartAndEndDates(defaultdDate))">
+                            <div *ngIf="findReservation(date, hour)">
+                                <div class="reservation-info font-size13 text-dark">{{findReservation(date, hour)?.reservable?.name | titlecase}}</div>
+                                <div class="margin-10px-top font-size14">{{getHour(findReservation(date, hour)?.startDate)+': 00'}}-{{getHour(findReservation(date, hour)?.endDate)+': 00'}}</div>
+                                <div class="font-size13 text-dark">{{findReservation(date, hour)?.professor?.firstName+' '+findReservation(date, hour)?.professor?.lastName}}</div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

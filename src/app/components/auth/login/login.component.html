@@ -1,0 +1,17 @@
+<div class="login container-fluid bg-light">
+    <form #login="ngForm"  ngNativeValidate class="login-form form col-md-3 mx-auto border bg-white shadow-sm rounded p-3" (ngSubmit)="onSubmit(login)" >
+        <div class="logo">SP</div>
+        <h2 class="text-center">School Plateforme</h2>
+        <div class="form-group p-1">
+            <label for="mail">Mail</label>
+            <input type="text" name="email" required ngModel placeholder="Email" class="form-control" id="mail">
+        </div>
+        <div class="form-group p-1">
+            <label for="password">Password</label>
+            <input type="password" name="password" required ngModel placeholder="Password" class="form-control" id="password">
+        </div>
+        <div class="form-group pt-3">
+            <button class="btn btn-primary btn-block col-md-12" type="submit" > <fa-icon [icon]="icons.spinner" [pulse]="true" *ngIf="loading"></fa-icon> Se Connecter</button>
+        </div>
+    </form>
+</div>
