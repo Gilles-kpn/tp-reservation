@@ -1,6 +1,7 @@
 {
   "name": "front",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description":"TP",
   "engines": {
     "node": ">=16.13.0",
     "npm": ">=8.1.0",
