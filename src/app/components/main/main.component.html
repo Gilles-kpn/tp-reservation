@@ -12,10 +12,10 @@
             <fa-icon [icon]="icons.bell"></fa-icon>
             <div class="dropdown no-arrow nav-item">
                 <button  type="button" id="useraction" class="dropdown-toggle  name" aria-expanded="false" data-bs-toggle="dropdown">
-                    KG
+                    {{getName()|uppercase}}
                 </button>
                 <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                    <a class="dropdown-item" href="#"><fa-icon [icon]="icons.account"></fa-icon> Compte</a>
+                    <a class="dropdown-item"  [routerLink]="['/account']"><fa-icon [icon]="icons.account"></fa-icon> Compte</a>
                     <a class="dropdown-item" (click)="logout()" href="javascript:void(0)"><fa-icon [icon]="icons.signOut"  ></fa-icon> Se déconnecter</a>
                 </div>
             </div>
@@ -43,7 +43,7 @@
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
             <!-- Left -->
             <div class="me-5 d-none d-lg-block">
-                <span>Get connected with us on social networks:</span>
+                <span>Connectez vous avec nos reseaux sociaux</span>
             </div>
             <!-- Left -->
     
@@ -87,19 +87,19 @@
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">
-                            Products
+                            Technologies
                         </h6>
                         <p>
-                            <a href="#!" class="text-reset">Angular</a>
+                            <a href="javascript:void(0)" class="text-reset">Angular</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Spring</a>
+                            <a href="javascript:void(0)" class="text-reset">Spring</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">ASP.NET</a>
+                            <a href="javascript:void(0)" class="text-reset">ASP.NET</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Laravel</a>
+                            <a href="javascript:void(0)" class="text-reset">Laravel</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -111,16 +111,10 @@
                             Useful links
                         </h6>
                         <p>
-                            <a href="#!" class="text-reset">Pricing</a>
+                            <a href="javascript:void(0)" class="text-reset" [routerLink]="['/planning']">Planning</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Settings</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Orders</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Help</a>
+                            <a href="javascript:void(0)" [routerLink]="['/account']" class="text-reset">Account</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -131,13 +125,13 @@
                         <h6 class="text-uppercase fw-bold mb-4">
                             Contact
                         </h6>
-                        <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+                        <p><i class="fas fa-home me-3"></i>Cotonou Ifri 2021</p>
                         <p>
                             <i class="fas fa-envelope me-3"></i>
-                            info@example.com
+                            okpanou2@gmail.com
                         </p>
-                        <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-                        <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                        <p><i class="fas fa-phone me-3"></i> +229 60 02 64 36</p>
+                        <p><i class="fas fa-print me-3"></i> +229 65 83 54 22</p>
                     </div>
                     <!-- Grid column -->
                 </div>
@@ -149,7 +143,7 @@
         <!-- Copyright -->
         <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
             © 2021 Copyright:
-            <a class="text-reset fw-bold" href="https://get-this.herokuapp.com" target="_blank">MDBootstrap.com</a>
+            <a class="text-reset fw-bold" href="https://uac.bj" target="_blank">Uac</a>
         </div>
         <!-- Copyright -->
     </footer>

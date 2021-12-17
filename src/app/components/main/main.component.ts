@@ -29,4 +29,9 @@ export class MainComponent implements OnInit {
     return roles.includes(this.app.getUser()?.status)? true:false
   }
 
+  getName(){
+    //@ts-ignore
+    return this.app.getUser()?.firstName.charAt(0)+this.app.getUser()?.lastName.charAt(0)
+  }
+
 }

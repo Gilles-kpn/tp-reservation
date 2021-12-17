@@ -1,0 +1,58 @@
+<div class="col-md-8 col-md-offset-3 mx-auto account mb-5">
+
+    <div class="row p-4">
+
+        <div class="card-body">
+            <div class="card-title d-flex align-items-center justify-content-between">
+                <div class="h3">Consulter votre compte</div>
+                <fa-icon [icon]="icons.edit" (click)="editable = !editable"></fa-icon>
+            </div>
+            <div class="row">
+                <div class="card col-md-3">
+                    <div class="logo mx-auto mt-4 mb-4">
+                        SP
+                    </div>
+                    <div class="info ">
+                        <div class="h3 text-center">{{app.getUser()?.firstName+' '+app.getUser()?.lastName}}</div>
+                        <div class="h6 text-center">{{role()}}</div>
+                    </div>
+                </div>
+                <div class="form col-md-8 p-4">
+                    <div class="form-group row mt-2 mb-2">
+                        <div class="col-md-6">
+                            <label for="firstname">Nom</label>
+                            <input type="text" id="firstname" name="firstname" [readonly]="!editable" [placeholder]="app.getUser()?.firstName"
+                                class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="lastname">Prenom</label>
+                            <input type="text" id="lastname" name="lastname" [readonly]="!editable" [placeholder]="app.getUser()?.lastName"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group mt-2 mb-2">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="email" [readonly]="!editable" [placeholder]="app.getUser()?.email"
+                            id="email">
+                    </div>
+                    <div class="divider"></div>
+                    <div class="form-group row mt-2 mb-2" *ngIf="isUser()">
+                        <div class="col-md-6">
+                            <label for="firstname">Annee d'etude</label>
+                            <input type="text" id="firstname" name="firstname" [readonly]="true"
+                                [placeholder]="app.getUser()?.year+' Annee'" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="lastname">Filiere</label>
+                            <input type="text" id="lastname" name="lastname" [readonly]="true" [placeholder]="sector()"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

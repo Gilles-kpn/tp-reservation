@@ -1,6 +1,6 @@
 import { faGoogle, faFacebook, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { faBell, faEye } from '@fortawesome/free-regular-svg-icons';
-import { faSearch, faCalendar, faUser, faSignOutAlt, faSchool, faTasks, faMapMarker, faRegistered, faTools, faSpinner, faFileExport } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faEdit, faEye } from '@fortawesome/free-regular-svg-icons';
+import { faSearch, faCalendar, faUser, faSignOutAlt, faSchool, faTasks, faMapMarker, faRegistered, faTools, faSpinner, faFileExport, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -24,7 +24,8 @@ export class IconsService {
   spinner=faSpinner
   eye=faEye
   export=faFileExport
-
+  plus=faPlus
+  edit=faEdit
   constructor() { }
 
 }

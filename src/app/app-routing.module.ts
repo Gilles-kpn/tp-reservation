@@ -1,3 +1,4 @@
+import { AccountComponent } from './components/account/account.component';
 import { RoleGuard } from './guards/role.guard';
 import { ReservationsComponent } from './components/reservations/reservations.component';
 import { PlanningComponent } from './components/planning/planning.component';
@@ -39,6 +40,14 @@ const routes: Routes = [
         canActivate: [RoleGuard],
         data: {
           roles: [0,1, 2]
+        }
+      },
+      {
+        path:"account",
+        component:AccountComponent,
+        canActivate:[RoleGuard],
+        data:{
+          roles:[0,1,2]
         }
       },
       {
